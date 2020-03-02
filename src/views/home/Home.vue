@@ -6,6 +6,7 @@
     <homeRecommendView :recommends="recommends"/>
     <homeFeatureView/>
     <tab-control class="tab-control" :titles="['流行','新款','精选']"/>
+    <goods-list :goods="goods['pop'].list"/>
     <ul>
       <li>列表1</li>
       <li>列表2</li>
@@ -112,14 +113,17 @@
 </template>
 
 <script>
-  import NavBar from "components/common/nav/NavBar";
-
-  import {getHomeMultidata,getHomeGoods} from "network/home";
 
   import HomeSwiper from "./childComps/HomeSwiper";
   import HomeRecommendView from "./childComps/HomeRecommendView";
   import HomeFeatureView from "./childComps/HomeFeatureView";
+
+
+  import NavBar from "components/common/nav/NavBar";
   import TabControl from "components/content/tabControl/TabControl";
+  import GoodsList from "components/content/goods/GoodsList";
+
+  import {getHomeMultidata,getHomeGoods} from "network/home";
 
   export default {
     name: "Home",
@@ -128,7 +132,8 @@
       HomeSwiper,
       HomeRecommendView,
       HomeFeatureView,
-      TabControl
+      TabControl,
+      GoodsList
     },
     data() {
       return {
@@ -189,5 +194,6 @@
   .tab-control{
     position: sticky;
     top: 44px;
+    z-index: 9;
   }
 </style>
