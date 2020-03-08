@@ -5,7 +5,8 @@
               ref="scroll"
               :probe-type="3"
               @scroll="contentScroll"
-              :pull-up-load="true">
+              :pull-up-load="true"
+              @pullingUp="loadMore">
         <homeSwiper :banners="banners"/>
         <!--这里的banners是从data中取出来通过props传给Home中的组件定义的参数，展示-->
         <homeRecommendView :recommends="recommends"/>
@@ -56,7 +57,7 @@
           'sell': {page:0,list:[]}
         },
         currentType:'pop',
-        isShowBackTop:true
+        isShowBackTop:false
       }
     },
     computed:{
@@ -99,13 +100,16 @@
       },
       backClick(){
         //通过组件访问组件里的属性，方法
-        this.$refs.scroll.scrollTo(0,0,500)
+        this.$refs.scroll.scrollTo(0, 0)
       },
       contentScroll(position){
         // console.log(position);
-        this.isShowBackTop = (-position.y)>1000
+        this.isShowBackTop = (-position.y) > 1000
       },
-
+      //加载更多
+      loadMore(){
+        this.getHomeGoods(this.currentType)
+      },
       /**
        * 网络请求
        */
@@ -127,6 +131,9 @@
           // console.log(res);
           this.goods[type].list.push(...res.data.list);
           this.goods[type].page+=1
+
+        //  完成上拉加载更多
+          this.$refs.scroll.finishPullUp();
         })
       }
     }
