@@ -5,8 +5,7 @@
               ref="scroll"
               :probe-type="3"
               @scroll="contentScroll"
-              :pull-up-load="true"
-              @pullingUp="loadMore">
+              :pull-up-load="true">
         <homeSwiper :banners="banners"/>
         <!--这里的banners是从data中取出来通过props传给Home中的组件定义的参数，展示-->
         <homeRecommendView :recommends="recommends"/>
@@ -70,10 +69,29 @@
       this.getHomeGoods('new')
       this.getHomeGoods('sell')
     },
+    mounted() {
+
+      const refresh = this.debounce(this.$refs.scroll.refresh,50)
+
+      //  组件创建完就开始监听item的图片加载完成
+      this.$bus.$on('itemImageLoad',()=>{
+        refresh()
+      })
+    },
     methods:{
       /**
        * 事件监听的方法
        */
+      debounce(func,delay){
+        let timer = null
+
+        return function (...args) {
+          if (timer) clearTimeout(timer)
+          timer = setTimeout(()=>{
+            func.apply(this,args)
+          },delay)
+        }
+      },
       tabClick(index){
         // console.log(index);
         switch (index) {
@@ -95,11 +113,6 @@
       contentScroll(position){
         // console.log(position);
         this.isShowBackTop = (-position.y)>1000
-      },
-      loadMore(){
-        // console.log('上拉加载更多');
-        this.getHomeGoods(this.currentType)
-        this.$refs.scroll.scroll.refresh()
       },
 
       /**
@@ -123,7 +136,6 @@
           // console.log(res);
           this.goods[type].list.push(...res.data.list);
           this.goods[type].page+=1
-          this.$refs.scroll.finishPullUp()
         })
       }
     }
