@@ -62,13 +62,29 @@
         currentType:'pop',
         isShowBackTop:false,
         tabOffsetTop:0,
-        isTabFixed:false
+        isTabFixed:false,
+        saveY:0
       }
     },
     computed:{
       showGoods(){
         return this.goods[this.currentType].list
       }
+    },
+    destroyed() {
+      console.log('home destroyed');
+    },
+    activated() {
+    //  进来
+      console.log('actived');
+      this.$refs.scroll.scrollTo(0,this.saveY,0)
+      this.$refs.scroll.refresh()
+    },
+    deactivated() {
+    //  离开
+      console.log('deactived');
+      console.log(this.saveY);
+      this.saveY = this.$refs.scroll.getScrollY()
     },
     created() {
       this.getHomeMultidata()
