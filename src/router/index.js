@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import VueRouter from "vue-router";
 
+
+const Detail =()=> import ('../views/detail/Detail')
 const home =()=> import('../views/home/Home')
 const category =()=> import('../views/category/Category')
 const cart =()=> import('../views/cart/Cart')
@@ -30,6 +32,10 @@ const routes=[
   {
     path:'/profile',
     component:profile
+  },
+  {
+    path:'/detail/:iid',
+    component:Detail
   }
 ]
 const router = new VueRouter({

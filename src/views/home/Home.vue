@@ -83,8 +83,9 @@
     deactivated() {
     //  离开
       console.log('deactived');
-      console.log(this.saveY);
       this.saveY = this.$refs.scroll.getScrollY()
+      console.log(this.saveY);
+
     },
     created() {
       this.getHomeMultidata()
