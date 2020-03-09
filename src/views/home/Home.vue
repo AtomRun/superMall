@@ -76,15 +76,15 @@
     },
     activated() {
     //  进来
-      console.log('actived');
+    //   console.log('actived');
       this.$refs.scroll.scrollTo(0,this.saveY,0)
       this.$refs.scroll.refresh()
     },
     deactivated() {
     //  离开
-      console.log('deactived');
+    //   console.log('deactived');
       this.saveY = this.$refs.scroll.getScrollY()
-      console.log(this.saveY);
+      // console.log(this.saveY);
 
     },
     created() {
