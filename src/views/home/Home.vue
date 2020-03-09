@@ -71,9 +71,9 @@
         return this.goods[this.currentType].list
       }
     },
-    destroyed() {
-      console.log('home destroyed');
-    },
+    // destroyed() {
+    //   console.log('home destroyed');
+    // },
     activated() {
     //  进来
     //   console.log('actived');
