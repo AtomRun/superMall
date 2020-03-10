@@ -11,6 +11,8 @@
       <goods-list ref="recommend" :goods="recommends"/>
     </scroll>
     <detail-bottom-bar />
+    <!--组件不能被直接监听，需要使用native修饰符-->
+    <back-top @click.native="backClick" v-show="isShowBackTop"/>
   </div>
 </template>
 
@@ -26,11 +28,13 @@
   import DetailBottomBar from "./childComps/DetailBottomBar";
 
   import GoodsList from "components/content/goods/GoodsList";
+  import BackTop from "components/content/backTop/BackTop";
 
   import {getDetail,Goods,Shop,GoodsParam,getRecommend} from "network/detail";
 
   import Scroll from "components/common/scroll/Scroll";
   import {debounce} from "../../common/utils";
+  import {BACKTOP_DISTANCE} from "common/const";
 
 
   export default {
@@ -45,7 +49,8 @@
       DetailParamInfo,
       DetailCommentInfo,
       DetailBottomBar,
-      GoodsList
+      GoodsList,
+      BackTop
     },
     data(){
       return{
@@ -59,7 +64,8 @@
         recommends:[],
         themeTopYs:[],
         getThemeTopY:null,
-        currentIndex:0
+        currentIndex:0,
+        isShowBackTop:false,
       }
     },
     created() {
@@ -128,8 +134,13 @@
             this.currentIndex = i;
             this.$refs.nav.currentIndex = this.currentIndex
           }
+          this.isShowBackTop = (-position.y) > BACKTOP_DISTANCE
         }
-      }
+      },
+      backClick(){
+        //通过组件访问组件里的属性，方法
+        this.$refs.scroll.scrollTo(0, 0,300)
+      },
     },
   }
 </script>

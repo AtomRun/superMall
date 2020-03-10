@@ -37,6 +37,7 @@
 
   import {getHomeMultidata,getHomeGoods} from "network/home";
   import {debounce} from "common/utils";
+  import {BACKTOP_DISTANCE} from "common/const";
 
   export default {
     name: "Home",
@@ -129,7 +130,7 @@
       contentScroll(position){
         // console.log(position);
         // 判断backtop是否显示
-        this.isShowBackTop = (-position.y) > 1000
+        this.isShowBackTop = (-position.y) > BACKTOP_DISTANCE
       //  2. 判断tabControl是否吸顶
         this.isTabFixed=(-position.y)>this.tabOffsetTop
       },
