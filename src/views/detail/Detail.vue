@@ -10,6 +10,7 @@
       <detail-comment-info ref="comment" :comment-info="commentInfo"/>
       <goods-list ref="recommend" :goods="recommends"/>
     </scroll>
+    <detail-bottom-bar />
   </div>
 </template>
 
@@ -22,6 +23,7 @@
   import DetailGoodsInfo from "./childComps/DetailGoodsInfo";
   import DetailParamInfo from "./childComps/DetailParamInfo";
   import DetailCommentInfo from "./childComps/DetailCommentInfo";
+  import DetailBottomBar from "./childComps/DetailBottomBar";
 
   import GoodsList from "components/content/goods/GoodsList";
 
@@ -42,6 +44,7 @@
       DetailGoodsInfo,
       DetailParamInfo,
       DetailCommentInfo,
+      DetailBottomBar,
       GoodsList
     },
     data(){
@@ -139,7 +142,7 @@
     height: 100vh;
   }
   .content{
-    height: calc(100% - 44px);
+    height: calc(100% - 44px - 58px);
   }
   .detail-nav{
     position: relative;
