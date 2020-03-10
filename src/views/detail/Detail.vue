@@ -102,7 +102,7 @@
         this.themeTopYs.push(this.$refs.comment.$el.offsetTop)
         this.themeTopYs.push(this.$refs.recommend.$el.offsetTop)
         // console.log(this.themeTopYs);
-      })
+      },100)
     },
     methods:{
       imageLoad(){
