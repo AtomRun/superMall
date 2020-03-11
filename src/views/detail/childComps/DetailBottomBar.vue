@@ -26,7 +26,7 @@
     name: "DetailBottomBar",
     methods: {
       addToCart() {
-        this.$emit('addToCart')
+        this.$emit('addCart')
       }
     }
   }
@@ -34,15 +34,14 @@
 
 <style scoped>
   .bottom-bar {
-    height: 58px;
-    position: fixed;
-    background-color: #fff;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    height: 49px;
+    background-color: #ffffff;
+    position: relative;
+    bottom: 49px;
 
     display: flex;
     text-align: center;
+
   }
 
   .bar-item {
@@ -62,7 +61,7 @@
     display: block;
     width: 22px;
     height: 22px;
-    margin: 10px auto 3px;
+    margin: 5px auto 3px;
     background: url("~assets/img/detail/detail_bottom.png") 0 0/100%;
   }
 

@@ -2,6 +2,11 @@
   <div id="detail">
     <detail-nav-bar class="detail-nav" @titleClick="titleClick" ref="nav"/>
     <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll">
+      <ul>
+        <li v-for="item in $store.state.cartList">
+          {{item}}
+        </li>
+      </ul>
       <detail-swiper :top-images="topImages"></detail-swiper>
       <detail-base-info :goods="goods"/>
       <detail-shop-info :shop="shop"/>
@@ -10,7 +15,7 @@
       <detail-comment-info ref="comment" :comment-info="commentInfo"/>
       <goods-list ref="recommend" :goods="recommends"/>
     </scroll>
-    <detail-bottom-bar />
+    <detail-bottom-bar @addCart="addToCart"/>
     <!--组件不能被直接监听，需要使用native修饰符-->
     <back-top @click.native="backClick" v-show="isShowBackTop"/>
   </div>
@@ -141,6 +146,19 @@
         //通过组件访问组件里的属性，方法
         this.$refs.scroll.scrollTo(0, 0,300)
       },
+      addToCart(){
+        //1. 获取购物车需要的信息
+        const product = {}
+        product.image = this.topImages[0];
+        product.title = this.goods.title;
+        product.desc = this.goods.desc;
+        product.price = this.goods.newPrice;
+        product.iid = this.iid;
+
+      //  2. 将商品添加到购物车中
+      //   this.$store.commit('addCart',product)
+        this.$store.dispatch('addCart',product)
+      }
     },
   }
 </script>
@@ -153,7 +171,7 @@
     height: 100vh;
   }
   .content{
-    height: calc(100% - 44px - 58px);
+    height: calc(100% - 43px - 0px);
   }
   .detail-nav{
     position: relative;
