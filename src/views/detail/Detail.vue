@@ -35,7 +35,7 @@
   import Scroll from "components/common/scroll/Scroll";
   import {debounce} from "../../common/utils";
   import {BACKTOP_DISTANCE} from "common/const";
-
+  import {mapActions} from 'vuex'
 
   export default {
     name: "Detail",
@@ -50,7 +50,8 @@
       DetailCommentInfo,
       DetailBottomBar,
       GoodsList,
-      BackTop
+      BackTop,
+      // Toast
     },
     data(){
       return{
@@ -115,6 +116,9 @@
       },100)
     },
     methods:{
+      ...mapActions({
+        add:'addCart'
+      }),
       imageLoad(){
         this.$refs.scroll.refresh()
         this.getThemeTopY()
@@ -151,8 +155,10 @@
         product.iid = this.iid;
 
       //  2. 将商品添加到购物车中
-      //   this.$store.commit('addCart',product)
-        this.$store.dispatch('addCart',product)
+        this.add(product).then(res=>{
+          console.log(this.$toast);
+          this.$toast.show(res);
+        })
       }
     },
   }
