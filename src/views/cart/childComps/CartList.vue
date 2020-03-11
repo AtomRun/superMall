@@ -1,10 +1,10 @@
 <template>
   <div class="cart-list">
-    <scroll class="content">
+    <scroll class="content" ref="scroll">
         <cart-list-item
           v-for="(item,index) in list"
           :key="index"
-          :product="item"/>
+          :item-info="item"/>
     </scroll>
   </div>
 </template>
@@ -24,6 +24,9 @@
       ...mapGetters({
         list:'cartList'
       })
+    },
+    activated() {
+      this.$refs.scroll.refresh()
     }
   }
 </script>
