@@ -12,17 +12,19 @@
         type:Boolean,
         default:true
       }
-    }
+    },
+
   }
 </script>
 
 <style scoped>
   .check-button{
-    background-color: red;
+
     border-radius: 50%;
     border: 1px solid #aaa;
   }
   .check{
+    background-color: red;
     border-color:red;
   }
 </style>
